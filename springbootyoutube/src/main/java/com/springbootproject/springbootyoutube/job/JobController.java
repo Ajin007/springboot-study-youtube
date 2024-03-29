@@ -18,11 +18,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class JobController {
 
+    //This is created sinece we are not have not connected any thing to the datatbase so only
     private List<Job> jobs=new ArrayList<>();
 
     @GetMapping("/jobs")
     public List<Job> findAll(){
         return jobs;
     }
+
+
+
 
 }
