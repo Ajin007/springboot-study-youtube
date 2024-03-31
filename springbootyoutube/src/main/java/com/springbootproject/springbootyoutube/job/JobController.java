@@ -23,6 +23,8 @@ public class JobController {
     //This is created sinece we are not have not connected any thing to the datatbase so only
     private JobService jobService;
 
+    private Long user_id;
+
 
     @GetMapping("/jobs")
     public List<Job> findAll(){
@@ -41,6 +43,9 @@ public class JobController {
         // to understand how this works use postman  and send a json object 
         //shall use jsoninit like to make perfect json format data
         // This is the link https://jsonlint.com/ to validate the Json format
+
+        //This line is added to  ensure ID is uniquely updated
+        job.setId(user_id++);
         jobService.createJob(job);
         return "Current job added successfully";
     }
