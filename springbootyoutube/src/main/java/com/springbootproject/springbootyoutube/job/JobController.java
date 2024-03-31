@@ -3,6 +3,7 @@ package com.springbootproject.springbootyoutube.job;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,7 +24,7 @@ public class JobController {
     //This is created sinece we are not have not connected any thing to the datatbase so only
     private JobService jobService;
 
-    private Long user_id;
+    private Long user_id=0L;
 
 
     @GetMapping("/jobs")
@@ -48,6 +49,14 @@ public class JobController {
         job.setId(user_id++);
         jobService.createJob(job);
         return "Current job added successfully";
+    }
+
+    @GetMapping("/jobs/{id}")
+    public Job getJobById(@PathVariable Long id){
+
+       Job job= jobService.getJobById(id);
+        return job;
+
     }
 
 
