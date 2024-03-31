@@ -1,6 +1,5 @@
 package com.springbootproject.springbootyoutube.job;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,11 +21,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class JobController {
 
     //This is created sinece we are not have not connected any thing to the datatbase so only
-    private List<Job> jobs=new ArrayList<>();
+    private JobService jobService;
+
 
     @GetMapping("/jobs")
     public List<Job> findAll(){
-        return jobs;
+        return jobService.findAll();
+    }
+
+    //constructor
+    public JobController(JobService jobService) {
+        this.jobService = jobService;
     }
 
     @PostMapping("/jobs")
@@ -36,7 +41,7 @@ public class JobController {
         // to understand how this works use postman  and send a json object 
         //shall use jsoninit like to make perfect json format data
         // This is the link https://jsonlint.com/ to validate the Json format
-        jobs.add(job);//Adding a new job
+        jobService.createJob(job);
         return "Current job added successfully";
     }
 
